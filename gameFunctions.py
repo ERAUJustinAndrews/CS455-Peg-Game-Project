@@ -1,6 +1,7 @@
 import displayFunctions
 
 # -----------------------------------------------
+# -----------------------------------------------
 
 """
 Justin Andrews
@@ -17,13 +18,16 @@ Function Declarations:
     checkMove(peg1, peg2, peg3, pegList)
     
     doMove(peg1, peg2, peg3, pegs, screen)
+    
+    anyMoves(pegs)
 """
 
+
+# -----------------------------------------------
 # -----------------------------------------------
 
 
 def checkClick(clickX, clickY):
-
     """
     Function Description:
     here
@@ -91,7 +95,101 @@ def checkClick(clickX, clickY):
 
 
 def checkMove(peg1, peg2, peg3, pegList):
+    """
+    Function Description:
+    here
 
+    :param peg1: int value of the first peg in the move, the peg to jump
+    :param peg2: int value of the second peg in the move, the peg to be jumped
+    :param peg3: int value of the third peg in the move, the spot for the first peg to jump to
+    :param pegList: array of True and False values corresponding to current peg locations
+    :return: True or False value if the move is valid and the move can be completed with the current game state
+    """
+
+    # the move that wants to be performed
+    move = [peg1, peg2, peg3]
+
+    moveValid = False
+
+    valid = False
+
+    # check if the move is valid
+    if peg1 == 0:
+        if (peg2 == 1 or peg2 == 2) and (peg3 == 3 or peg3 == 5):
+            moveValid = True
+
+    elif peg1 == 1:
+        if (peg2 == 3 or peg2 == 4) and (peg3 == 6 or peg3 == 8):
+            moveValid = True
+
+    elif peg1 == 2:
+        if (peg2 == 4 or peg2 == 5) and (peg3 == 7 or peg3 == 9):
+            moveValid = True
+
+    elif peg1 == 3:
+        if (peg2 == 1 or peg2 == 4 or peg2 == 7 or peg2 == 6) and (peg3 == 0 or peg3 == 5 or peg3 == 12 or peg3 == 10):
+            moveValid = True
+
+    elif peg1 == 4:
+        if (peg2 == 7 or peg2 == 8) and (peg3 == 11 or peg3 == 13):
+            moveValid = True
+
+    elif peg1 == 5:
+        if (peg2 == 2 or peg2 == 4 or peg2 == 8 or peg2 == 9) and (peg3 == 0 or peg3 == 3 or peg3 == 12 or peg3 == 14):
+            moveValid = True
+
+    elif peg1 == 6:
+        if (peg2 == 3 or peg2 == 7) and (peg3 == 1 or peg3 == 8):
+            moveValid = True
+
+    elif peg1 == 7:
+        if (peg2 == 8 or peg2 == 4) and (peg3 == 9 or peg3 == 2):
+            moveValid = True
+
+    elif peg1 == 8:
+        if (peg2 == 4 or peg2 == 7) and (peg3 == 1 or peg3 == 6):
+            moveValid = True
+
+    elif peg1 == 9:
+        if (peg2 == 5 or peg2 == 8) and (peg3 == 2 or peg3 == 7):
+            moveValid = True
+
+    elif peg1 == 10:
+        if (peg2 == 6 or peg2 == 11) and (peg3 == 3 or peg3 == 12):
+            moveValid = True
+
+    elif peg1 == 11:
+        if (peg2 == 7 or peg2 == 12) and (peg3 == 4 or peg3 == 13):
+            moveValid = True
+
+    elif peg1 == 12:
+        if peg2 == 11 or peg2 == 7 or peg2 == 8 or peg2 == 13:
+            if peg3 == 10 or peg3 == 3 or peg3 == 5 or peg3 == 14:
+                moveValid = True
+
+    elif peg1 == 13:
+        if (peg2 == 12 or peg2 == 8) and (peg3 == 11 or peg3 == 4):
+            moveValid = True
+
+    elif peg1 == 14:
+        if (peg2 == 13 or peg2 == 9) and (peg3 == 12 or peg3 == 5):
+            moveValid = True
+
+    else:
+        moveValid = False
+
+    # if move valid and peg locations are valid
+    if moveValid and pegList[peg1] and pegList[peg2] and not pegList[peg3]:
+        valid = True
+
+    # return if move was valid and can be completed
+    return valid
+
+
+# -----------------------------------------------
+
+
+def doMove(peg1, peg2, peg3, pegs, screen):
     """
     Function Description:
     here
@@ -99,12 +197,34 @@ def checkMove(peg1, peg2, peg3, pegList):
     :param peg1:
     :param peg2:
     :param peg3:
-    :param pegList:
+    :param pegs:
+    :param screen:
     :return:
     """
 
-    # the move that wants to be performed
-    move = [peg1, peg2, peg3]
+    # set empty peg locations
+    pegs[peg1] = False
+    pegs[peg2] = False
+    pegs[peg3] = True
+
+    pegs = displayFunctions.setBoard(pegs, screen)
+
+    return pegs
+
+
+# -----------------------------------------------
+
+
+def anyMoves(pegs):
+    """
+    Function Description:
+    here
+
+    :param pegs:
+    :return:
+    """
+
+    possibleMove = True
 
     # check move against possible moves
     switcher = {
@@ -126,47 +246,20 @@ def checkMove(peg1, peg2, peg3, pegList):
         14: [[14, 13, 12], [14, 9, 5]]
     }
     # get moves starting at the first peg selected
-    possibleMoves = switcher.get(peg1)
+    possibleMoves = switcher.get(pegs[0])
 
-    # print valid moves from that starting position
-    print('Valid Moves =', possibleMoves)
+    print(possibleMoves)
 
-    # check if move is in valid moves list and peg holes are in valid states
-    i = 0
-    while i < len(possibleMoves):
-        if possibleMoves[i] == move and pegList[peg1] and pegList[peg2] and not pegList[peg3]:
-            print('Got One! Move:', i)
-            valid = True
-        else:
-            valid = False
-        i = i + 1
+    for i in range(15):
 
-    # return if move was valid and can be completed
-    return valid
-
-
-# -----------------------------------------------
-
-
-def doMove(peg1, peg2, peg3, pegs, screen):
+        if pegs[i]:
+            currentMoves = switcher.get(i)
 
     """
-    Function Description:
-    here
-
-    :param peg1:
-    :param peg2:
-    :param peg3:
-    :param pegs:
-    :param screen:
-    :return:
+    testy = [[1, 2, 3], [7, 8, 9]]
+    testTime = testy[0]
+    print(testTime[1])
+    # prints 2
     """
 
-    # set empty peg locations
-    pegs[peg1] = False
-    pegs[peg2] = False
-    pegs[peg3] = True
-
-    pegs = displayFunctions.setBoard(pegs, screen)
-
-    return pegs
+    return possibleMove

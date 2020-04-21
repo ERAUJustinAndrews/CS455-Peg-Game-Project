@@ -1,6 +1,7 @@
 import pygame
 
 # -----------------------------------------------
+# -----------------------------------------------
 
 """
 Justin Andrews
@@ -21,6 +22,7 @@ Function Declarations:
     setBoard(pegs, screen)
 """
 
+# -----------------------------------------------
 # -----------------------------------------------
 # DISPLAY VARIABLES
 
@@ -48,6 +50,7 @@ pegHoleY = [y - 17.5 for y in pegHoleCenterY]
 
 
 # -----------------------------------------------
+# -----------------------------------------------
 
 
 def board(screen):
@@ -60,6 +63,7 @@ def board(screen):
     :return:
     """
 
+    # place board at x,y
     screen.blit(boardImage, (boardX, boardY))
 
 
@@ -78,6 +82,7 @@ def placeHolder(screen, x, y):
     :return:
     """
 
+    # place empty hole at x,y
     screen.blit(holderImage, (x, y))
 
 
@@ -96,6 +101,7 @@ def placePeg(screen, x, y):
     :return:
     """
 
+    # place peg on screen at x,y
     screen.blit(pegImage, (x, y))
 
 
@@ -117,12 +123,14 @@ def setBoard(pegs, screen):
     """
 
     # arrange True and False to correspond with correct peg locations
-    i = 0
-    while i < len(pegs):
+    for i in range(len(pegs)):
+
+        # if peg not in hole
         if not pegs[i]:
             placeHolder(screen, pegHoleX[i], pegHoleY[i])
+
+        # if peg in hole
         else:
             placePeg(screen, pegHoleX[i], pegHoleY[i])
-        i = i + 1
 
     return pegs

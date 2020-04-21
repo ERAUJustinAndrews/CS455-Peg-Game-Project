@@ -19,14 +19,12 @@ File Description:
 This is the main file that calls the functions to run the game.
 """
 
-# TODO: if the move is the 0th element in the list/dictionary the move wont be valid
 # TODO: add text box with current pegs in the clicks array
 # TODO: add clear clicks button to clear clicks array
 # TODO: check if any other moves are possible by using moves list/dictionary, then end game if none
 # TODO: add search algorithms
-# TODO: add comment blocks with description, input, output of functions
+# TODO: edit comment blocks with description, input, output of functions
 # TODO: all files have comment block with name, class, project, and description at top
-# TODO: readme file, images folder, titled "images" containing all images used in the game, in same folder as program
 
 
 # -----------------------------------------------
@@ -45,7 +43,7 @@ screen = pygame.display.set_mode((1000, 800))
 pygame.display.set_caption("Peg Game")
 
 # create array that hold true and false values for holes that have pegs and holes that have no pegs
-pegs = [True, True, True, True, True, True, False, True, True, True, True, True, True, True, True]
+pegs = [True, True, True, True, True, True, False, True, True, True, False, True, True, True, True]
 
 
 # -----------------------------------------------
