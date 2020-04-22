@@ -1,6 +1,7 @@
 import pygame
 import displayFunctions
 import gameFunctions
+import searchFunctions
 
 # -----------------------------------------------
 # -----------------------------------------------
@@ -9,11 +10,7 @@ import gameFunctions
 Justin Andrews
 Spring 2020
 CS455 - Artificial Intelligence
-Peg Game - Final Project
-
-Project Description:
-This project plays the Peg Game made famous by the Cracker Barrel Restaurants.
-This project also uses search algorithms to play the game using artificial intelligence.
+Final Project - Peg Game
 
 File Description:
 This is the main file that calls the functions to run the game.
@@ -21,8 +18,11 @@ This is the main file that calls the functions to run the game.
 
 # TODO: add text box with current pegs in the clicks array
 # TODO: add clear clicks button to clear clicks array
-# TODO: check if any other moves are possible by using moves list/dictionary, then end game if none
+
+# TODO: find all moves that are possible with the current board state, for search algorithm purposes
 # TODO: add search algorithms
+# TODO: player mode option vs search algorithm option
+#       (or PegGame.py and PegSearch.py and run depending, just reuse functions)
 # TODO: edit comment blocks with description, input, output of functions
 # TODO: all files have comment block with name, class, project, and description at top
 
@@ -43,7 +43,7 @@ screen = pygame.display.set_mode((1000, 800))
 pygame.display.set_caption("Peg Game")
 
 # create array that hold true and false values for holes that have pegs and holes that have no pegs
-pegs = [True, True, True, True, True, True, False, True, True, True, False, True, True, True, True]
+pegs = [True, True, True, True, True, False, True, True, True, True, True, True, True, True, True]
 
 
 # -----------------------------------------------
@@ -120,10 +120,39 @@ while running:
                         # clear the array of clicks, the move has been completed and applied
                         clicks.clear()
 
+                        # check if there are any possible moves
+                        if not gameFunctions.anyMoves(pegs):
+
+                            print("No more possible moves.\n")
+
+                            # count how many pegs are left on the board
+                            countPegs = 0
+
+                            # check how many pegs are left
+                            for i in range(len(pegs)):
+
+                                # if peg is true
+                                if pegs[i]:
+
+                                    # increment peg counter
+                                    countPegs = countPegs + 1
+
+                            # print how many pegs were left on the board
+                            print("Game Over...")
+                            print("You left", countPegs, "pegs on the board!")
+
+                            # if no more moves then game is over
+                            running = False
+
                     # if the move is not valid
                     else:
 
                         print("\nInvalid Move.\n")
+
+                        # moves = searchFunctions.findMoves(pegs)
+                        moves = searchFunctions.search(pegs, searchFunctions.findMoves(pegs))
+
+                        # print(moves)
 
                         # clear the array of clicks to begin a new move
                         clicks.clear()

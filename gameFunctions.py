@@ -224,7 +224,7 @@ def anyMoves(pegs):
     :return:
     """
 
-    possibleMove = True
+    movePossible = False
 
     # check move against possible moves
     switcher = {
@@ -246,20 +246,39 @@ def anyMoves(pegs):
         14: [[14, 13, 12], [14, 9, 5]]
     }
     # get moves starting at the first peg selected
-    possibleMoves = switcher.get(pegs[0])
 
-    print(possibleMoves)
-
+    # go through pegs checking for possible moves
     for i in range(15):
 
+        # if current peg is true/does have a peg in that hole
         if pegs[i]:
-            currentMoves = switcher.get(i)
+
+            # get the list of possible moves starting at current peg
+            moveList = switcher.get(i)
+
+            # go through list of possible moves to find if the board state is valid for any of them
+            for j in range(len(moveList)):
+
+                # current move from move list being checked
+                currentMove = moveList[j]
+
+                # create variables of the pegs being checked
+                peg1 = currentMove[0]
+                peg2 = currentMove[1]
+                peg3 = currentMove[2]
+
+                if pegs[peg1] and pegs[peg2] and not pegs[peg3]:
+                    movePossible = True
 
     """
     testy = [[1, 2, 3], [7, 8, 9]]
     testTime = testy[0]
     print(testTime[1])
     # prints 2
+    
+    possibleMoves = False
+    if there is a possible move make that true and stop checking
+    to find if move possible find
     """
 
-    return possibleMove
+    return movePossible
