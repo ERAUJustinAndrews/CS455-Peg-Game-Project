@@ -66,6 +66,24 @@ def board(screen):
     # place board at x,y
     screen.blit(boardImage, (boardX, boardY))
 
+    # format text for search algorithm button
+    textFormatAlgorithm = pygame.font.SysFont("arial", 35)
+
+    # create text for search algorithm button
+    text = textFormatAlgorithm.render("Click here to run search algorithm!", True, (0, 0, 0))
+
+    # place search algorithm text on screen
+    screen.blit(text, (10, 10))
+
+    # format text for clear clicks button
+    textFormatClicks = pygame.font.SysFont("arial", 25)
+
+    # create text for clear clicks button
+    text = textFormatClicks.render("Click here to clear clicks!", True, (0, 0, 0))
+
+    # place clear clicks text on screen
+    screen.blit(text, (390, 680))
+
 
 # -----------------------------------------------
 

@@ -44,7 +44,7 @@ pygame.display.set_caption("Peg Game")
 
 # create array that hold true and false values for holes that have pegs and holes that have no pegs
 pegs = [True, True, True, True, True, False, True, True, True, True, True, True, True, True, True]
-
+searchPegs = [True, True, True, True, True, False, True, True, True, True, True, True, True, True, True]
 
 # -----------------------------------------------
 # -----------------------------------------------
@@ -87,6 +87,22 @@ while running:
 
             # get the coordinate position of the click
             clickPosX, clickPosY = pygame.mouse.get_pos()
+
+            # check if user clicked search algorithm text button
+            if 2 < clickPosX < 464 and 10 < clickPosY < 52:
+
+                print("\nRunning search algorithm! ... \n")
+
+                # if user clicked on search text button then run search function
+                searchFunctions.search(pegs)
+
+            # check if user clicked to clear clicks
+            elif 373 < clickPosX < 629 and 676 < clickPosY < 719:
+
+                # clear list of clicks
+                clicks.clear()
+
+                print("\nCleared list of clicks!\n")
 
             # check if the user clicked on a peg or valid location
             pegValid, pegClicked = gameFunctions.checkClick(clickPosX, clickPosY)
@@ -133,7 +149,6 @@ while running:
 
                                 # if peg is true
                                 if pegs[i]:
-
                                     # increment peg counter
                                     countPegs = countPegs + 1
 
@@ -148,11 +163,6 @@ while running:
                     else:
 
                         print("\nInvalid Move.\n")
-
-                        # moves = searchFunctions.findMoves(pegs)
-                        moves = searchFunctions.search(pegs, searchFunctions.findMoves(pegs))
-
-                        # print(moves)
 
                         # clear the array of clicks to begin a new move
                         clicks.clear()

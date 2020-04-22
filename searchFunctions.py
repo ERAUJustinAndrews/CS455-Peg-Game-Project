@@ -1,4 +1,4 @@
-import displayFunctions
+import threading
 import gameFunctions
 
 # -----------------------------------------------
@@ -21,54 +21,34 @@ Function Declarations:
 # -----------------------------------------------
 
 
-def search(pegs, moves):
-
+def search(pegs):
     """
     Function Description:
     here
 
-    :param moves:
     :param pegs:
     :return:
     """
 
-    originalPegs = pegs
+    moves = findMoves(pegs)
+    print(moves)
 
-    # moves = findMoves(pegs)
+    if gameFunctions.anyMoves(pegs):
 
-    for i in range(len(moves)):
+        for i in range(len(moves)):
 
-        currentPegs = originalPegs
+            currentMove = moves[i]
+            print(currentMove)
 
-        currentMove = moves[i]
+            pegs[currentMove[0]] = False
+            pegs[currentMove[1]] = False
+            pegs[currentMove[2]] = True
 
-        currentPegs[currentMove[0]] = False
-        currentPegs[currentMove[1]] = False
-        currentPegs[currentMove[2]] = True
+            search(pegs)
 
-        nextMove = findMoves(currentPegs)
-
-        if not nextMove:
-            fitness = sum(currentPegs)
-            print(nextMove)
-            print("done")
-            print(fitness)
-        else:
-            print(nextMove)
-            search(pegs, nextMove)
-
-    """
-    nextMove = findMoves(currentPegs)
-
-    if not nextMove:
-        fitness = sum(currentPegs)
-        print(nextMove)
-        print("done")
-        print(fitness)
     else:
-        print(nextMove)
-        search(currentPegs, nextMove)
-    """
+        print('done')
+        print('fitness =', sum(pegs))
 
     return
 
@@ -77,7 +57,6 @@ def search(pegs, moves):
 
 
 def findMoves(pegs):
-
     """
     Function Description:
     here
@@ -97,7 +76,6 @@ def findMoves(pegs):
 
         # if peg hole is empty
         if not pegs[i]:
-
             # array of empty positions on the board
             emptySpots.append(i)
 
@@ -136,11 +114,8 @@ def findMoves(pegs):
 
             # check if the move is possible based on current board state
             if pegs[currentMove[0]] and pegs[currentMove[1]] and not pegs[currentMove[2]]:
-
                 # if possible add to moves list
                 moves.append(currentMove)
 
     # return moves list
     return moves
-
-
