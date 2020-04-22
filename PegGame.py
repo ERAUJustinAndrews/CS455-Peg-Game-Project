@@ -1,4 +1,6 @@
 import pygame
+import time
+
 import displayFunctions
 import gameFunctions
 import searchFunctions
@@ -13,19 +15,11 @@ CS455 - Artificial Intelligence
 Final Project - Peg Game
 
 File Description:
-This is the main file that calls the functions to run the game.
+This is the main file that calls the functions to run the game and search algorithm.
 """
 
-# TODO: add text box with current pegs in the clicks array
-# TODO: add clear clicks button to clear clicks array
-
-# TODO: find all moves that are possible with the current board state, for search algorithm purposes
-# TODO: add search algorithms
-# TODO: player mode option vs search algorithm option
-#       (or PegGame.py and PegSearch.py and run depending, just reuse functions)
 # TODO: edit comment blocks with description, input, output of functions
 # TODO: all files have comment block with name, class, project, and description at top
-
 
 # -----------------------------------------------
 # -----------------------------------------------
@@ -44,7 +38,7 @@ pygame.display.set_caption("Peg Game")
 
 # create array that hold true and false values for holes that have pegs and holes that have no pegs
 pegs = [True, True, True, True, True, False, True, True, True, True, True, True, True, True, True]
-searchPegs = [True, True, True, True, True, False, True, True, True, True, True, True, True, True, True]
+
 
 # -----------------------------------------------
 # -----------------------------------------------
@@ -91,10 +85,32 @@ while running:
             # check if user clicked search algorithm text button
             if 2 < clickPosX < 464 and 10 < clickPosY < 52:
 
-                print("\nRunning search algorithm! ... \n")
+                print("\nRunning BFS search algorithms! ... \n")
 
-                # if user clicked on search text button then run search function
-                searchFunctions.search(pegs)
+                # run BFS
+                print("Breadth First Search\n\n")
+                searchFunctions.searchBFS(pegs)
+
+                # pause game for user to see
+                time.sleep(3)
+
+                # quit game
+                running = False
+
+            # check if user clicked dfs search text button
+            elif 520 < clickPosX < 994 and 10 < clickPosY < 54:
+
+                print("\nRunning DFS search algorithms! ... \n")
+
+                # run DFS
+                print("Depth First Search\n\n")
+                searchFunctions.searchDFS(pegs)
+
+                # pause game for user to see
+                time.sleep(3)
+
+                # exit game
+                running = False
 
             # check if user clicked to clear clicks
             elif 373 < clickPosX < 629 and 676 < clickPosY < 719:
@@ -141,6 +157,10 @@ while running:
 
                             print("No more possible moves.\n")
 
+                            print("GAME OVER")
+
+                            print("...\n")
+
                             # count how many pegs are left on the board
                             countPegs = 0
 
@@ -153,8 +173,10 @@ while running:
                                     countPegs = countPegs + 1
 
                             # print how many pegs were left on the board
-                            print("Game Over...")
                             print("You left", countPegs, "pegs on the board!")
+
+                            # pause screen for user to see the final board
+                            time.sleep(3)
 
                             # if no more moves then game is over
                             running = False

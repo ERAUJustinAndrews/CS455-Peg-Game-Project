@@ -1,4 +1,3 @@
-import threading
 import gameFunctions
 
 # -----------------------------------------------
@@ -14,6 +13,9 @@ File Description:
 This file contains functions related to the search algorithm.
 
 Function Declarations:
+    search(pegs)
+    
+    findMove(pegs)
 """
 
 
@@ -21,7 +23,55 @@ Function Declarations:
 # -----------------------------------------------
 
 
-def search(pegs):
+def searchBFS(pegs):
+
+    """
+    Function Description:
+    here
+
+    :param pegs:
+    :return:
+    """
+
+    moves = findMoves(pegs)
+    print(moves)
+
+    pegsCopy = pegs
+
+    pegsList = [[], [], [], []]
+
+    if moves:
+
+        for i in range(len(moves)):
+
+            currentMove = moves[i]
+            print(currentMove)
+
+            pegsCopy[currentMove[0]] = False
+            pegsCopy[currentMove[1]] = False
+            pegsCopy[currentMove[2]] = True
+
+            pegsList[i] = pegsCopy
+
+        print()
+
+        pegList1 = pegsList[0]
+        searchBFS(pegsList[0])
+        searchBFS(pegsList[1])
+        searchBFS(pegsList[2])
+        searchBFS(pegsList[3])
+
+    else:
+        print('done')
+        print('fitness =', sum(pegs))
+
+    return
+
+
+# -----------------------------------------------
+
+
+def searchDFS(pegs):
     """
     Function Description:
     here
@@ -44,7 +94,7 @@ def search(pegs):
             pegs[currentMove[1]] = False
             pegs[currentMove[2]] = True
 
-            search(pegs)
+            searchDFS(pegs)
 
     else:
         print('done')
@@ -57,6 +107,7 @@ def search(pegs):
 
 
 def findMoves(pegs):
+
     """
     Function Description:
     here

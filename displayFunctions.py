@@ -63,18 +63,29 @@ def board(screen):
     :return:
     """
 
+    # DRAW BOARD
     # place board at x,y
     screen.blit(boardImage, (boardX, boardY))
 
-    # format text for search algorithm button
-    textFormatAlgorithm = pygame.font.SysFont("arial", 35)
+    # FORMAT TEXT
+    # format text for search algorithm buttons
+    textFormatAlgorithm = pygame.font.SysFont("arial", 32)
 
-    # create text for search algorithm button
-    text = textFormatAlgorithm.render("Click here to run search algorithm!", True, (0, 0, 0))
+    # DRAW BFS BUTTON
+    # create text for BFS search algorithm button
+    textBFS = textFormatAlgorithm.render("Click here to run BFS search algorithm!", True, (0, 0, 0))
 
-    # place search algorithm text on screen
-    screen.blit(text, (10, 10))
+    # place BFS search algorithm text on screen
+    screen.blit(textBFS, (10, 10))
 
+    # DRAW DFS BUTTON
+    # create text for DFS search algorithm button
+    textDFS = textFormatAlgorithm.render("Click here to run DFS search algorithm!", True, (0, 0, 0))
+
+    # place DFS search algorithm text on screen
+    screen.blit(textDFS, (530, 10))
+
+    # DRAW CLEAR CLICKS BUTTON
     # format text for clear clicks button
     textFormatClicks = pygame.font.SysFont("arial", 25)
 
@@ -137,7 +148,7 @@ def setBoard(pegs, screen):
 
     :param pegs:
     :param screen:
-    :return:
+    :return pegs: return the array pegs that holds true and false values for peg positions
     """
 
     # arrange True and False to correspond with correct peg locations
@@ -145,10 +156,14 @@ def setBoard(pegs, screen):
 
         # if peg not in hole
         if not pegs[i]:
+
+            # place black circle to show that no peg is at that location
             placeHolder(screen, pegHoleX[i], pegHoleY[i])
 
         # if peg in hole
         else:
+
+            # place peg at location
             placePeg(screen, pegHoleX[i], pegHoleY[i])
 
     return pegs
