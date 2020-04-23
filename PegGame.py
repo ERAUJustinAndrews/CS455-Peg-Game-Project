@@ -1,6 +1,5 @@
 import pygame
 import time
-
 import displayFunctions
 import gameFunctions
 import searchFunctions
@@ -16,10 +15,11 @@ Final Project - Peg Game
 
 File Description:
 This is the main file that calls the functions to run the game and search algorithm.
+
+Link to Github repository for this project:
+https://github.com/ERAUJustinAndrews/CS455-Peg-Game-Project
 """
 
-# TODO: edit comment blocks with description, input, output of functions
-# TODO: all files have comment block with name, class, project, and description at top
 
 # -----------------------------------------------
 # -----------------------------------------------

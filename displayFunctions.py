@@ -7,7 +7,7 @@ import pygame
 Justin Andrews
 Spring 2020
 CS455 - Artificial Intelligence
-Peg Game - Final Project
+Final Project - Peg Game
 
 File Description:
 This file contains functions needed to display the game.
@@ -57,10 +57,13 @@ def board(screen):
 
     """
     Function Description:
-    here
+    This function draws the board to the screen. It also draws 3 text boxes to the screen that act as buttons.
+    The first text box is used to initiate the Breadth First Search algorithm.
+    The second text box is used to initiate the Depth First Search algorithm.
+    The thirds text box is used to clear the array of clicks if a miss click was made while doing a move.
 
-    :param screen:
-    :return:
+    :param screen: this function takes the parameter screen which is used to display the graphics to the screen
+    :return: this function has no return, the output is purely graphical
     """
 
     # DRAW BOARD
@@ -103,12 +106,12 @@ def placeHolder(screen, x, y):
 
     """
     Function Description:
-    here
+    This function draws black circles to the board to indicate what peg holes are empty.
 
-    :param screen:
-    :param x:
-    :param y:
-    :return:
+    :param screen: this function takes the parameter screen to display the graphics to the screen
+    :param x: this function takes x, the x location of the graphic
+    :param y: this function takes y, the y location of the graphic
+    :return: this function has no return, the output is purely graphical
     """
 
     # place empty hole at x,y
@@ -122,12 +125,12 @@ def placePeg(screen, x, y):
 
     """
     Function Description:
-    here
+    This function draws the pegs to the board to indicate the game pieces.
 
-    :param screen:
-    :param x:
-    :param y:
-    :return:
+    :param screen: this function takes the parameter screen to display the graphics to the screen
+    :param x: this function takes x, the x location of the graphic
+    :param y: this function takes y, the y location of the graphic
+    :return: this function has no return, the output is purely graphic
     """
 
     # place peg on screen at x,y
@@ -144,10 +147,12 @@ def setBoard(pegs, screen):
 
     """
     Function Description:
-    here
+    This function sets the board with pegs and black circles to represent the empty holes.
+    This function is called to update the board with the new game state of pegs after moves are completed.
 
-    :param pegs:
-    :param screen:
+    :param pegs: this function takes the parameter pegs, an array of true and false values
+     to represent if pegs are at that peg hole - true, or if the hole is empty - false
+    :param screen: this function takes the parameter screen to display the graphics to
     :return pegs: return the array pegs that holds true and false values for peg positions
     """
 
@@ -166,4 +171,5 @@ def setBoard(pegs, screen):
             # place peg at location
             placePeg(screen, pegHoleX[i], pegHoleY[i])
 
+    # return array of where pegs are located
     return pegs

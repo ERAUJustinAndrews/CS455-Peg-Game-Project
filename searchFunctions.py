@@ -13,7 +13,9 @@ File Description:
 This file contains functions related to the search algorithm.
 
 Function Declarations:
-    search(pegs)
+    searchBFS(pegs)
+    
+    searchDFS(pegs)
     
     findMove(pegs)
 """
@@ -27,42 +29,56 @@ def searchBFS(pegs):
 
     """
     Function Description:
-    here
+    This function recursively applies a modified Breadth First Search algorithm to solve the Peg Game.
 
-    :param pegs:
-    :return:
+    :param pegs: array of true or false values corresponding to locations of pegs - true or empty peg holes - false
+    :return: this function has no returns but does print outputs
     """
 
+    # find the possible moves for the current peg locations
     moves = findMoves(pegs)
     print(moves)
 
+    # make a copy of the pegs variable to be used later while not changing the value of pegs
     pegsCopy = pegs
 
+    # create an empty list of lists to hold the pegs arrays of the moves that can be done
     pegsList = [[], [], [], []]
 
+    # if there are possible moves for the board state
     if moves:
 
+        # for each move possible
         for i in range(len(moves)):
 
+            # get the current move being completed
             currentMove = moves[i]
             print(currentMove)
 
+            # update a copy of the pegs array with the currentMove completed
             pegsCopy[currentMove[0]] = False
             pegsCopy[currentMove[1]] = False
             pegsCopy[currentMove[2]] = True
 
+            # add this copy of the pegs array to the list of copies
             pegsList[i] = pegsCopy
 
+        # print for spacing
         print()
 
-        pegList1 = pegsList[0]
+        # recursively search starting from the board states of each completed move
         searchBFS(pegsList[0])
         searchBFS(pegsList[1])
         searchBFS(pegsList[2])
         searchBFS(pegsList[3])
 
+    # if there are no possible moves
     else:
+
+        # print to indicate the search of this branch is done
         print('done')
+
+        # print the fitness of this branch of the search based on how many pegs are left on the board
         print('fitness =', sum(pegs))
 
     return
@@ -74,30 +90,41 @@ def searchBFS(pegs):
 def searchDFS(pegs):
     """
     Function Description:
-    here
+    This function recursively applies a modified Depth First Search algorithm to solve the Peg Game.
 
-    :param pegs:
-    :return:
+    :param pegs: array of true or false values corresponding to locations of pegs - true or empty peg holes - false
+    :return: this function has no returns but does print outputs
     """
 
+    # find possible moves based on the board state
     moves = findMoves(pegs)
     print(moves)
 
+    # if there are any possible moves for the board state
     if gameFunctions.anyMoves(pegs):
 
+        # for each move
         for i in range(len(moves)):
 
+            # set the current move being dealt with
             currentMove = moves[i]
             print(currentMove)
 
+            # update the pegs to reflect this move
             pegs[currentMove[0]] = False
             pegs[currentMove[1]] = False
             pegs[currentMove[2]] = True
 
+            # recursively search based on the board state of the move that was just completed
             searchDFS(pegs)
 
+    # if no moves are possible
     else:
+
+        # print to indicate the end of the branch
         print('done')
+
+        # print the fitness of this branch based on how many pegs are left of the board
         print('fitness =', sum(pegs))
 
     return
@@ -110,10 +137,10 @@ def findMoves(pegs):
 
     """
     Function Description:
-    here
+    This function finds all moves that are possible based on the current board state.
 
-    :param pegs:
-    :return:
+    :param pegs: array of true or false values corresponding to locations of pegs - true or empty peg holes - false
+    :return moves: return the list of possible moves based on the board state
     """
 
     # array to hold possible moves
