@@ -1,1 +1,5 @@
 This folder contains the images needed for the project.
+
+These images must be in a folder titled "images".
+
+The images folder should be inside of the same folder as the program files to successfully run the program.
