@@ -12,7 +12,7 @@ How to Play:
  See attached "pegBoard_grid_references" in the "images" folder as it illustrates the numbering schema of the board.
 
 File Setup:
- To run this game PegGame.py, searchFunctions.py, gameFunctions.py, and displayFunctions.py must all be in the same folder.
+ To run this game PegGame.py, searchFunctions.py, gameFunctions.py, and displayFunctions.py must all be downloaded and in the same folder.
  In the same folder as these files should be a folder named "images".
  This folder shall contain all images used in the game.
  
