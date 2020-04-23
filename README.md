@@ -1,4 +1,4 @@
-# CS455 Peg Game Project
+# CS455 Peg Game Project by Justin Andrews
 Introduction:
  This is my final project for CS455. For this project I created a Peg Game solver using search algorithms.
  This game can be played by the user or the game can be played with search algorithms solving the game.
