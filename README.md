@@ -35,4 +35,4 @@ To Run the Search Algorithms:
  
  
 The Github repository for this project is located at:
- https://github.com/ERAUJustinAndrews/CS455-Peg-Game-Project
+ https://github.com/JustinAndrewsCS/CS455-Peg-Game-Project
